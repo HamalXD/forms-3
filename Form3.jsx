@@ -5,9 +5,10 @@ const Forms3 = () => {
   const[userInfo,setUserInfo]=useState({
     firstName:"",
     middleName:"",
-    LastName:"",
+    lastName:"",
     birthMonth:"",
     birthDay:"",
+    birthYear: "",
     Gender:"",
     Address:"",
     city:"",
@@ -18,7 +19,7 @@ const Forms3 = () => {
 const {
   firstName,
     middleName,
-    LastName,
+    lastName,
     birthMonth,
     birthDay,
     birthYear,
@@ -29,16 +30,16 @@ const {
 
 } = userInfo;
 
-const FirstNameHandel =  ({target:{value}}) =>{
+const handleFirstName =  ({target:{value}}) =>{
   setUserInfo({...userInfo, firstName: value});
   console.log(userInfo.firstName);
 };
 
-const middleNameHandel = ({target:{value}}) =>{
+const handleMiddleName = ({target:{value}}) =>{
   setUserInfo({...userInfo, middleName: value});
 };
 
-const LastNameHandel =  ({target:{value}}) =>{
+const handleLastName =  ({target:{value}}) =>{
   setUserInfo({...userInfo, LastName: value});
 };
 const handleMonth =  ({target:{value}}) =>{
@@ -69,7 +70,20 @@ const handelCity =  ({target:{value}}) =>{
 const postalHandle =  ({target:{value}}) =>{
   setUserInfo({...userInfo, postal : value});
 };
-
+const handleForm = () =>{
+  if(firstName.trim() === '' || lastName.trim() === ''){
+    alert('Fill up the Name field')
+  }else if(birthMonth==='' || birthDay==='' || birthYear===''){
+    alert('Select your Birth date')
+  }else if(Gender === ''){
+    alert('select your gender')
+  }    else if(Address.trim() === '' || city.trim() === ''){
+    alert('Fill up the Address field')
+  }
+  else{
+    alert('Submitted')
+  }
+}
 const submitHandle = (e) => {
   e.preventDefault();
   alert('Submitted')
@@ -87,7 +101,7 @@ const submitHandle = (e) => {
             <label>First Name</label>
             <input 
             type="text"
-            onChange={FirstNameHandel}
+            onChange={handleFirstName}
             value={firstName}
             placeholder="First Name"
             />
@@ -96,8 +110,7 @@ const submitHandle = (e) => {
             <label> Middle Name </label>
             <input
             type="text"
-            onchange={middleNameHandel}
-            value={middleName}
+            onchange={handleMiddleName}
             placeholder="Middle Name"
             />
             </div>
@@ -105,8 +118,7 @@ const submitHandle = (e) => {
             <label> Last Name </label>
             <input
             type="text"
-            onchange={LastNameHandel}
-            value={LastName}
+            onchange={handleLastName}
             placeholder="Last Name"
             />
             </div>
@@ -119,7 +131,6 @@ const submitHandle = (e) => {
                 
                   <select 
                   onchange={handleMonth}
-                  value={birthMonth}
                   >
                   <option value=""
                   hidden>Month</option>
@@ -141,7 +152,6 @@ const submitHandle = (e) => {
                 <div class="day">
                 <select
                  onChange={handelDay}
-                 value={birthDay}
                 >
                   <option value="" hidden>Day</option>
                         <option value="1">1</option>
@@ -238,10 +248,10 @@ const submitHandle = (e) => {
                 value={Gender}
                 >
                   <option value=""
-                  hidden>gender</option>
+                  hidden>Gender</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
-
+                  <option value ="Other">Other</option>
                 </select>
                 <label>Gender</label>
                </div>
